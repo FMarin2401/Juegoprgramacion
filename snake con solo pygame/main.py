@@ -13,7 +13,7 @@ screen = pygame.display.set_mode(tamano)  # Crea una ventana con el tamaño espe
 deltaTiempo_s = cf.Config.deltaT_s  # Obtiene el atributo deltaT_s de la clase Config
 
 # Construir el juego
-snake_juego = Juego()  # Inicializa un objeto de la clase Juego del módulo modulo_juego
+snake_juego = sk.Juego()  # Inicializa un objeto de la clase Juego del módulo modulo_juego
 
 salir = False  # Variable para controlar la salida del bucle principal del juego
 
