@@ -1,14 +1,14 @@
 import pygame
 import config as cf  # Importa el módulo config.py, asumiendo que contiene la clase Config que tiene un atributo deltaT_s
-import math
 import sys
+import random
 class Juego():
     def __init__(self):
         self.tablero_fondo = Fondo()
         self.snake_cuerpo = [Cuerpo(100, 100)]  # Inicializa la serpiente con un solo segmento en la posición (100, 100)
         self.direccion = "RIGHT"  # Inicializa la dirección de la serpiente
         self.velocidad = 0.5 #Velocidad de la serpiente
-
+        
     def movimiento_teclado(self, event):
         """
         Maneja los eventos de teclado para controlar la dirección de la serpiente.
@@ -40,6 +40,7 @@ class Juego():
     def actualizar(self):
         """
         Actualiza la posición de la serpiente en función de la dirección y la velocidad.
+        Verifica las colisiones con los bordes de la ventana.
         """
         cabeza_x = self.snake_cuerpo[0].x
         cabeza_y = self.snake_cuerpo[0].y
@@ -56,12 +57,12 @@ class Juego():
         # Verifica las colisiones con los bordes de la ventana
         if cabeza_x < 0 or cabeza_x >= cf.SCREEN_WIDTH or cabeza_y < 0 or cabeza_y >= cf.SCREEN_HEIGHT:
             # La serpiente ha colisionado con los bordes de la ventana
-            mensaje = f"""¡Colisión! Game Over"""
+            mensaje = "¡Colisión con el borde de la ventana!"
             font = pygame.font.SysFont(None, 36)  # Define la fuente del texto
             texto = font.render(mensaje, True, (255, 255, 255))  # Renderiza el texto
             screen.blit(texto, (cf.SCREEN_WIDTH // 2 - texto.get_width() // 2, cf.SCREEN_HEIGHT // 2 - texto.get_height() // 2))  # Dibuja el texto en el centro de la pantalla
             pygame.display.update()  # Actualiza la pantalla
-            pygame.time.delay(4000)  # Espera 4 segundos antes de cerrar el juego
+            pygame.time.delay(2000)  # Espera 2 segundos antes de cerrar el juego
             pygame.quit()  # Cierra pygame
             sys.exit()  # Cierra el programa
 
@@ -118,5 +119,6 @@ class Cuerpo():
         # El cuerpo
         # Por simplicidad, vamos a dibujar un rectángulo
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.x, self.y, 20, 20))
+
 
 pygame.init()  # Inicializa pygame
