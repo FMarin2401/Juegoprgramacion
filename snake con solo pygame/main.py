@@ -1,7 +1,7 @@
 # Primer programa en Pygame
 import pygame  # Importa el módulo pygame para trabajar con gráficos y sonido
 import config as cf  # Importa el módulo config.py, asumiendo que contiene la clase Config que tiene un atributo deltaT_s
-import snake2 as sk  # Importa el módulo modulo_juego.py que contiene la clase Juego
+import snake as sk  # Importa el módulo modulo_juego.py que contiene la clase Juego
 pygame.init()  # Inicializa pygame
 
 

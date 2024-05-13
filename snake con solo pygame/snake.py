@@ -2,13 +2,15 @@ import pygame
 import config as cf  # Importa el módulo config.py, asumiendo que contiene la clase Config que tiene un atributo deltaT_s
 import sys
 import random
+from main import screen
+
 class Juego():
     def __init__(self):
         self.tablero_fondo = Fondo()
         self.snake_cuerpo = [Cuerpo(100, 100)]  # Inicializa la serpiente con un solo segmento en la posición (100, 100)
         self.direccion = "RIGHT"  # Inicializa la dirección de la serpiente
         self.velocidad = 0.5 #Velocidad de la serpiente
-        
+
     def movimiento_teclado(self, event):
         """
         Maneja los eventos de teclado para controlar la dirección de la serpiente.
@@ -122,3 +124,5 @@ class Cuerpo():
 
 
 pygame.init()  # Inicializa pygame
+
+# Primer programa en Pygame
