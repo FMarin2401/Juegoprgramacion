@@ -3,4 +3,4 @@ class Config():
 # En el módulo config.py
 
 SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 700
+SCREEN_HEIGHT = 650

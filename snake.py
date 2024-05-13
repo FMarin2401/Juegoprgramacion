@@ -10,7 +10,7 @@ class Juego():
         self.tablero_fondo = Fondo()
         self.snake_cuerpo = [Serpiente(100, 100)]
         self.direccion = "RIGHT"
-        self.velocidad = 0.2
+        self.velocidad = 0.5
         self.manzana = Manzana()
         self.segmento_size = 2
     def movimiento_teclado(self, event):
