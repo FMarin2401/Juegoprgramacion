@@ -11,10 +11,11 @@ class Juego():
         self.tablero_fondo = Fondo()
         self.snake_cuerpo = [Serpiente(100, 100)]  # Inicializa la serpiente con un solo segmento en la posición (100, 100)
         self.direccion = "RIGHT"  # Inicializa la dirección de la serpiente
-        self.velocidad = 0.5 #Velocidad de la serpiente
+        self.velocidad = 0.7 #Velocidad de la serpiente
         self.manzana = Manzana()  # Agregar la manzana al juego
+        self.segmento_size = 20  # Tamaño inicial de los segmentos de la serpiente
 
-    
+
     def movimiento_teclado(self, event): #Controles de la serpíente
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP or event.key == pygame.K_w:
@@ -41,16 +42,19 @@ class Juego():
     def actualizar(self): #Para actualizar la pantalla
         cabeza_x = self.snake_cuerpo[0].x
         cabeza_y = self.snake_cuerpo[0].y
-        print("Cabeza de la serpiente:", cabeza_x, cabeza_y)
-        print("Posición de la manzana:", self.manzana.x, self.manzana.y)
-        
+
+
         # Verificar si la serpiente come la manzana (con un margen de 10 píxeles alrededor de la posición de la manzana)
-        if abs(cabeza_x - self.manzana.x) < 10 and abs(cabeza_y - self.manzana.y) < 10:
-            print("¡La serpiente comió la manzana!")
+        
+        if abs(cabeza_x - self.manzana.x) < 25 and abs(cabeza_y - self.manzana.y) < 25:
+            
             self.manzana.generar_posicion()  # Generar una nueva posición para la manzana
+            # Aumentar el tamaño de los segmentos de la serpiente
+            self.segmento_size += 900000
             # Añadir un nuevo segmento al cuerpo de la serpiente en la posición de la última cola
             nueva_cola = Serpiente(self.snake_cuerpo[-1].x, self.snake_cuerpo[-1].y)
             self.snake_cuerpo.append(nueva_cola)
+
         if self.direccion == "UP":
             cabeza_y -= self.velocidad
         elif self.direccion == "DOWN":
@@ -68,7 +72,6 @@ class Juego():
             pygame.time.delay(4000)
             pygame.quit()
             sys.exit()
-
         nueva_cabeza = Serpiente(cabeza_x, cabeza_y)
         self.snake_cuerpo.insert(0, nueva_cabeza)
         self.snake_cuerpo.pop()
@@ -89,7 +92,7 @@ class Serpiente(): #cuerop de la serpiente
         self.x = x
         self.y = y
     def dibujar(self, screen):
-        pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.x, self.y, 20, 20))
+        pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.x, self.y, 25, 25))
 
 class Manzana():
     def __init__(self):
@@ -100,4 +103,4 @@ class Manzana():
         self.y = random.randint(0, cf.SCREEN_HEIGHT - 20)  # Posición y aleatoria dentro de la altura del tablero
 
     def dibujar(self, screen):
-        pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(self.x, self.y, 20, 20))
+        pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(self.x, self.y, 25, 25))

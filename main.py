@@ -14,7 +14,6 @@ deltaTiempo_s = cf.Config.deltaT_s  # Obtiene el atributo deltaT_s de la clase C
 
 # Construir el juego
 snake_juego = sk.Juego()  # Inicializa un objeto de la clase Juego del módulo modulo_juego
-
 salir = False  # Variable para controlar la salida del bucle principal del juego
 
 # Bucle principal del juego
@@ -23,14 +22,10 @@ while not salir:
         if event.type == pygame.QUIT:
             salir = True  # Si se detecta el evento de cerrar la ventana, se establece salir como True
         snake_juego.movimiento_teclado(event)  # Maneja los eventos de teclado
-
     # Actualiza la posición de la serpiente en función de la dirección
     snake_juego.actualizar()
-
     # Aquí redibujamos todos los objetos del juego
     snake_juego.dibuja(screen)  # Llama al método dibuja de la clase Juego para redibujar todos los objetos en la pantalla
-
-    # Flip para pantalla
     pygame.display.flip()  # Actualiza la pantalla
 
 pygame.quit()  # Cierra pygame
