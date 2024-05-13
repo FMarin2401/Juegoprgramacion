@@ -4,7 +4,6 @@ import sys
 import random
 tamano = (cf.SCREEN_WIDTH, cf.SCREEN_HEIGHT)
 screen = pygame.display.set_mode(tamano)
-
 class Juego():
     def __init__(self):
         self.tablero_fondo = Fondo()
@@ -32,6 +31,8 @@ class Juego():
         for cuerpo in self.snake_cuerpo:
             cuerpo.dibujar(screen)
         self.manzana.dibujar(screen)
+
+
     def actualizar(self):
         cabeza_x = self.snake_cuerpo[0].x
         cabeza_y = self.snake_cuerpo[0].y
@@ -49,7 +50,7 @@ class Juego():
         elif self.direccion == "RIGHT":
             cabeza_x += self.velocidad
         if cabeza_x < 0 or cabeza_x >= cf.SCREEN_WIDTH or cabeza_y < 0 or cabeza_y >= cf.SCREEN_HEIGHT:
-            mensaje = f"""¡Colisión! Game Over"""
+            mensaje = f"""Game Over"""
             font = pygame.font.SysFont(None, 36)
             texto = font.render(mensaje, True, (255, 255, 255))
             screen.blit(texto, (cf.SCREEN_WIDTH // 2 - texto.get_width() // 2, cf.SCREEN_HEIGHT // 2 - texto.get_height() // 2))
@@ -61,6 +62,9 @@ class Juego():
         self.snake_cuerpo.insert(0, nueva_cabeza)
         self.snake_cuerpo.pop()
 
+
+
+        
 class Fondo():
     def __init__(self):
         self.img_fondo = pygame.image.load("fondo.jpg")
@@ -71,14 +75,12 @@ class Fondo():
         rectangulo.top = 0
         screen.blit(self.img_fondo, rectangulo)
         return
-
 class Serpiente():
     def __init__(self, x, y):
         self.x = x
         self.y = y
     def dibujar(self, screen):
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.x, self.y, 25, 25))
-
 class Manzana():
     def __init__(self):
         self.generar_posicion()
