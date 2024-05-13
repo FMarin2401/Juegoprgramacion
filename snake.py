@@ -14,16 +14,22 @@ class Juego():
         self.velocidad = 0.5 #Velocidad de la serpiente
         self.manzana = Manzana()  # Agregar la manzana al juego
 
+    
     def movimiento_teclado(self, event): #Controles de la serpíente
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP or event.key == pygame.K_w:
-                self.direccion = "UP"
+                if self.direccion != "DOWN":  # Evitar que la serpiente vaya hacia abajo si ya se está moviendo hacia arriba
+                    self.direccion = "UP"
             elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
-                self.direccion = "DOWN"
+                if self.direccion != "UP":  # Evitar que la serpiente vaya hacia arriba si ya se está moviendo hacia abajo
+                    self.direccion = "DOWN"
             elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                self.direccion = "LEFT"
+                if self.direccion != "RIGHT":  # Evitar que la serpiente vaya hacia la derecha si ya se está moviendo hacia la izquierda
+                    self.direccion = "LEFT"
             elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                self.direccion = "RIGHT"
+                if self.direccion != "LEFT":  # Evitar que la serpiente vaya hacia la izquierda si ya se está moviendo hacia la derecha
+                    self.direccion = "RIGHT"
+
 
     def dibuja(self, screen): #el fondo de la imagen
         self.tablero_fondo.dibuja(screen)  # Dibuja el fondo del tablero
