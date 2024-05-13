@@ -10,10 +10,9 @@ class Juego():
         self.tablero_fondo = Fondo()
         self.snake_cuerpo = [Serpiente(100, 100)]
         self.direccion = "RIGHT"
-        self.velocidad = 0.7
+        self.velocidad = 0.2
         self.manzana = Manzana()
-        self.segmento_size = 20
-
+        self.segmento_size = 2
     def movimiento_teclado(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP or event.key == pygame.K_w:
@@ -28,23 +27,19 @@ class Juego():
             elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 if self.direccion != "LEFT":
                     self.direccion = "RIGHT"
-
     def dibuja(self, screen):
         self.tablero_fondo.dibuja(screen)
         for cuerpo in self.snake_cuerpo:
             cuerpo.dibujar(screen)
         self.manzana.dibujar(screen)
-
     def actualizar(self):
         cabeza_x = self.snake_cuerpo[0].x
         cabeza_y = self.snake_cuerpo[0].y
-
         if abs(cabeza_x - self.manzana.x) < 25 and abs(cabeza_y - self.manzana.y) < 25:
             self.manzana.generar_posicion()
-            self.segmento_size += 900000
+            self.segmento_size += 2
             nueva_cola = Serpiente(self.snake_cuerpo[-1].x, self.snake_cuerpo[-1].y)
             self.snake_cuerpo.append(nueva_cola)
-
         if self.direccion == "UP":
             cabeza_y -= self.velocidad
         elif self.direccion == "DOWN":
@@ -68,7 +63,7 @@ class Juego():
 
 class Fondo():
     def __init__(self):
-        self.img_fondo = pygame.image.load("escuela.jpg")
+        self.img_fondo = pygame.image.load("fondo.jpg")
         return
     def dibuja(self, screen):
         rectangulo = self.img_fondo.get_rect()
@@ -87,10 +82,8 @@ class Serpiente():
 class Manzana():
     def __init__(self):
         self.generar_posicion()
-
     def generar_posicion(self):
         self.x = random.randint(0, cf.SCREEN_WIDTH - 20)
         self.y = random.randint(0, cf.SCREEN_HEIGHT - 20)
-
     def dibujar(self, screen):
         pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(self.x, self.y, 25, 25))
